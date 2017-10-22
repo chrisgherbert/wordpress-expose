@@ -1,0 +1,83 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+	{% block results_header %}
+
+		<h4>
+
+			Data for {{ site.name|default(site.url) }}
+
+			{% if items.current_page > 1 %} <small>(page {{ items.current_page }})</small> {% endif %}
+
+		</h4>
+
+		{% if error %}
+			<div class="alert alert-danger">
+				{{ error }}
+			</div>
+		{% endif %}
+
+		<hr>
+
+	{% endblock %}
+
+	{% block results_main %}
+
+		{% block results_count %}
+
+			<h4>
+				Found {{ items.total_items|number_format }} Items
+			</h4>
+
+		{% endblock %}
+
+		{% block results_pagination_top %}
+
+			{% if items.total_pages > 1 %}
+
+				<ul class="pagination">
+
+					{% for page in items.pagination %}
+
+						<li {% if page.current %}class="active"{% endif %}>
+							<a href="{{ page.url }}">
+								{{ page.num }}
+							</a>
+						</li>
+
+					{% endfor %}
+
+				</ul>
+
+			{% endif %}
+
+		{% endblock %}
+
+		{% block results_items %}{% endblock %}
+
+		{% block results_pagination_bottom %}
+
+			{% if items.total_pages > 1 %}
+
+				<ul class="pagination">
+
+					{% for page in items.pagination %}
+
+						<li {% if page.current %}class="active"{% endif %}>
+							<a href="{{ page.url }}">
+								{{ page.num }}
+							</a>
+						</li>
+
+					{% endfor %}
+
+				</ul>
+
+			{% endif %}
+
+		{% endblock %}
+
+	{% endblock %}
+
+{% endblock %}

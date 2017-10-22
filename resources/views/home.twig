@@ -1,0 +1,29 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+	<form action="/wordpress/users" method="GET">
+
+		<div class="form-group">
+			<label for="url">Site URL (users)</label>
+			<input class="form-control" type="text" name="url" placeholder="http://site.com">
+		</div>
+
+		<button class="btn btn-primary" type="submit">Submit</button>
+
+	</form>
+
+	<hr />
+
+	<form action="/wordpress/comments" method="GET">
+
+		<div class="form-group">
+			<label for="url">Site URL (comments)</label>
+			<input class="form-control" type="text" name="url" placeholder="http://site.com">
+		</div>
+
+		<button class="btn btn-primary" type="submit">Submit</button>
+
+	</form>
+
+{% endblock %}
