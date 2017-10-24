@@ -1,6 +1,25 @@
+// General
+$spacing: 60px;
+
+// Container
+$container-large-desktop: 1170px;
+
+// Colors (app)
+$site-blue: #305D88;
+$site-red: #BC434B;
+$site-offblack: #373737;
+$site-gray: #9F9F9F;
+$site-beige: #F9F7F3;
+
+// Colors (brand)
+$brand-primary: #3097D1;
+$brand-info: #8eb4cb;
+$brand-success: #2ab27b;
+$brand-warning: #cbb956;
+$brand-danger: #bf5329;
 
 // Body
-$body-bg: #f5f8fa;
+$body-bg: $site-beige;
 
 // Borders
 $laravel-border-color: darken($body-bg, 10%);
@@ -9,19 +28,17 @@ $navbar-default-border: $laravel-border-color;
 $panel-default-border: $laravel-border-color;
 $panel-inner-border: $laravel-border-color;
 
-// Brands
-$brand-primary: #3097D1;
-$brand-info: #8eb4cb;
-$brand-success: #2ab27b;
-$brand-warning: #cbb956;
-$brand-danger: #bf5329;
-
 // Typography
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-$font-family-sans-serif: "Raleway", sans-serif;
-$font-size-base: 14px;
-$line-height-base: 1.6;
-$text-color: #636b6f;
+$font-family-sans-serif: "Montserrat", sans-serif;
+$font-size-base: 18px;
+$line-height-base: 1.4;
+$text-color: $site-offblack;
+$link-color: $site-red;
+$font-weight: 300;
+$headings-font-weight: 800;
+
+$font-size-h1: 35px;
 
 // Navbar
 $navbar-default-bg: #fff;

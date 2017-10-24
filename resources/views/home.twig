@@ -1,29 +1,271 @@
 {% extends 'base.twig' %}
 
-{% block content %}
+{% block base_header %}
 
-	<form action="/wordpress/users" method="GET">
+	{% block home_hero %}
 
-		<div class="form-group">
-			<label for="url">Site URL (users)</label>
-			<input class="form-control" type="text" name="url" placeholder="http://site.com">
+		<div class="home-hero">
+
+			<h1 class="home-hero__logo">
+				<div class="sr-only">
+					WordPress Exposé
+				</div>
+				<img src="/img/home-logo.png" alt="site logo">
+			</h1>
+
+			<div class="home-hero__content">
+
+				<div class="container">
+
+					<div class="col-md-8 col-md-offset-2">
+
+						<h3 class="home-hero__heading">
+							Find information on WordPress users, comments, and Gravatars
+						</h3>
+
+						<div class="home-search-tabs tab-content">
+
+							<div class="home-search-tabs__item tab-pane fade in active" id="form-users">
+
+								<form action="/wordpress/users" method="GET" class="search-form search-form--home search-form--users">
+
+									<label for="url" class="sr-only">
+										WordPress Site URL
+									</label>
+
+									<input type="text" name="url" class="search-form__input" value="{{ site.url }}" placeholder="WordPress Site URL">
+
+									<button type="submit" class="search-form__submit">
+										Show Users
+									</button>
+
+								</form>
+
+							</div>
+
+							<div class="home-search-tabs__item tab-pane fade" id="form-comments">
+
+								<form action="/wordpress/comments" method="GET" class="search-form search-form--home search-form--comments">
+
+									<label for="url" class="sr-only">
+										WordPress Site URL
+									</label>
+
+									<input type="text" name="url" class="search-form__input" value="{{ site.url }}" placeholder="WordPress Site URL">
+
+									<button type="submit" class="search-form__submit search-form__submit--blue">
+										Show Comments
+									</button>
+
+								</form>
+
+							</div>
+
+							<div class="home-search-tabs__item tab-pane fade" id="form-gravatar">
+
+								<form action="/gravatar" method="GET" class="search-form search-form--home search-form--gravatar">
+
+									<label for="url" class="sr-only">
+										Gravatar
+									</label>
+
+									<input type="text" name="url" class="search-form__input" value="{{ site.url }}" placeholder="Gravatar URL">
+
+									<button type="submit" class="search-form__submit search-form__submit--green">
+										Lookup Gravatar
+									</button>
+
+								</form>
+
+							</div>
+
+						</div>
+
+						<div class="tabs tabs--top tabs--light home-tabs" role="tablist">
+
+							<a class="tabs__link active" href="#form-users" role="tab" data-toggle="tab">WordPress Users</a>
+
+							<a class="tabs__link" href="#form-comments" role="tab" data-toggle="tab">WordPress Comments</a>
+
+							<a class="tabs__link" href="#form-gravatar" role="tab" data-toggle="tab">Gravatars</a>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
 		</div>
 
-		<button class="btn btn-primary" type="submit">Submit</button>
+	{% endblock %}
 
-	</form>
+	{% block home_content %}
 
-	<hr />
+		<div class="section home-content-section">
 
-	<form action="/wordpress/comments" method="GET">
+			<div class="container-fluid">
 
-		<div class="form-group">
-			<label for="url">Site URL (comments)</label>
-			<input class="form-control" type="text" name="url" placeholder="http://site.com">
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+
+						<div class="text-center">
+
+							<div class="section-number">
+								<div class="section-number__inner">
+									1
+								</div>
+							</div>
+
+						</div>
+
+						<h3 class="home-content-section__heading">
+
+							What is this and how does it work?
+
+						</h3>
+
+						<div class="home-content-section__text">
+							<p>The site relies on a series design decisions made by the developers of WordPress and Gravatar. In newer versions of WordPress, a list of all users who have posted content is publicly available.  The information about these users includes their display names, their usernames, and their “Gravatar.”</p>
+							<p><a href="https://en.wikipedia.org/wiki/Gravatar">Gravatar</a> is a service that can provide a unique avatar for each email address.  They’re used by sites like Stack Overflow, Discourse, and thousands of other forums and blogs that include commenting systems.</p>
+							<p>Unfortunately, the standard implementation exposes a “hash” of the user’s email address in the Gravatar URL.  In some cases, this makes it easy to reveal the actual email address of the user attached to a Gravatar.  These Gravatars are also automatically created for users, and the hashed email address is available even if they’ve never created an account with Gravatar.</p>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
 		</div>
 
-		<button class="btn btn-primary" type="submit">Submit</button>
+		<div class="section home-content-section home-content-section--dark">
 
-	</form>
+			<div class="container-fluid">
+
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+
+						<div class="text-center">
+
+							<div class="section-number">
+								<div class="section-number__inner">
+									2
+								</div>
+							</div>
+
+						</div>
+
+						<h3 class="home-content-section__heading">
+							Are all Gravatars vulnerable?
+						</h3>
+
+						<div class="home-content-section__text">
+							<p>Because of the system’s fundamental design, all Gravatars are vulnerable to a persistent person with a beefy GPU and a copy of Hashcat. This site has a relatively small list of emails and their associated hashes, so you’ll likely find that less than 10% of the Gravatars are reversible.</p>
+							<p>Here's a short reading list on Gravatar's privacy issues:</p>
+							<ol>
+								<li>
+									<a href="http://www.developer.it/post/gravatars-why-publishing-your-email-s-hash-is-not-a-good-idea">Gravatars: why publishing your email's hash is not a good idea</a> 
+									(Andreas Viklund)
+								</li>
+								<li>
+									<a href="https://www.wordfence.com/blog/2016/12/gravatar-advisory-protect-email-address-identity/">Gravatar Advisory: How to Protect Your Email Address and Identity</a> 
+									(WordFence)
+								</li>
+								<li>
+									<a href="https://meta.stackexchange.com/questions/21117/is-using-gravatar-a-security-risk">Is using Gravatar a security risk?</a> 
+									(StackExchange)
+								</li>
+								<li>
+									<a href="https://arstechnica.com/information-technology/2013/12/crypto-weakness-in-web-comment-system-exposes-hate-mongering-politicians/">Crypto weakness in Web comment system exposes hate-mongering politicians</a> 
+									(Ars Technica)
+								</li>
+							</ol>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="section home-content-section">
+
+			<div class="container-fluid">
+
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+
+						<div class="text-center">
+
+							<div class="section-number">
+								<div class="section-number__inner">
+									3
+								</div>
+							</div>
+
+						</div>
+
+						<h3 class="home-content-section__heading">
+							I tried several sites and they didn't work.
+						</h3>
+
+						<div class="home-content-section__text">
+							<p>Not all websites are vulnerable to this tool.  For it to work, a site must:</p>
+							<ol>
+								<li><strong>Be built on the standard, self-hosted version of WordPress.</strong> Sites that do not use WordPress will not work, and sites that are hosted on the commercial wordpress.com service will not work.</li>
+								<li><strong>Have the v2 REST API running and exposed to unauthenticated users.</strong> The v2 REST API was merged into core in WordPress version 4.7, so most sites with versions lower than that will not work. Additionally, many sites block unauthenticated access to the /users endpoint.  In general, most of the larger publishers that use WordPress do not expose this information. An example of a publication that does work is <strong>https://boingboing.net</strong></li>
+								<li><strong>Use the standard WordPress commenting system.</strong> Third party commenting systems like Disqus and Facebook will not work, unless they also save the comments back to the site's database as standard comments.</li>
+							</ol>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="section home-content-section home-content-section--dark">
+
+			<div class="container-fluid">
+
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+
+						<div class="text-center">
+
+							<div class="section-number">
+								<div class="section-number__inner">
+									4
+								</div>
+							</div>
+
+						</div>
+
+						<h3 class="home-content-section__heading">
+							How can I protect my site?
+						</h3>
+
+						<div class="home-content-section__text">
+
+							<p>If you maintain a WordPress-based website:</p>
+							<ol>
+								<li><strong>Block unauthenticated requests to the /users and /comments API endpoints.</strong>  There a great deal of plugins that will do this. The <a href="https://wordpress.org/plugins/disable-json-api/">Disable REST API plugin</a> is a good one and allows you to selectively require auth for different endpoints.</li>
+								<li><strong>Use a third-party commenting system.</strong> <a href="https://disqus.com">Disqus</a> has its own issues, but their avatars do not expose the commenters' emails.</li>
+								<li><strong>Push WordPress to remove Gravatar integration.</strong> In my opinion, Gravatars simply shouldn't be publicly accessible for users and comments in a default WordPress installation. As an creator or contributor to a website, do you expect your email or photo to be exposed to everyone on the web, even if your theme doesn't include author photos? Of course not.</li>
+							</ol>
+
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	{% endblock %}
 
 {% endblock %}

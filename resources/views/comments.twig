@@ -1,5 +1,23 @@
 {% extends 'results.twig' %}
 
+{% block results_form %}
+
+	<form action="/wordpress/comments" method="GET" class="search-form search-form--outline search-form--results search-form--comments">
+
+		<label for="url" class="sr-only">
+			WordPress Site URL
+		</label>
+
+		<input type="text" name="url" class="search-form__input" value="{{ site.url }}" placeholder="http://wwww.example.com">
+
+		<button type="submit" class="search-form__submit search-form__submit--blue">
+			Show Comments
+		</button>
+
+	</form>
+
+{% endblock %}
+
 {% block results_pagination_top %}
 
 	{% if items.next_prev %}
@@ -24,12 +42,11 @@
 
 {% block results_items %}
 
-	<table class="table">
+	<table class="results-table results-table--comments table">
 
 		<thead>
 
 			<tr>
-				<th>Avatar</th>
 				<th>Name</th>
 				<th>ID</th>
 				<th>Link</th>
@@ -43,23 +60,42 @@
 
 			{% for comment in items.items %}
 
-				<tr {% if comment.email %}class="success"{% endif %}>
-					<td>
-						<a href="{{ comment.avatar(500) }}">
-							<img src="{{ comment.avatar(30) }}">
-						</a>
+				<tr {% if comment.email %}class="info"{% endif %}>
+
+					<td class="results-table__name">
+
+						<div class="media results-table__name-inner">
+
+							<div class="media-left">
+								<a class="results-table__avatar" href="{{ comment.avatar(500) }}">
+									<img src="{{ comment.avatar(20) }}">
+								</a>
+							</div>
+
+							<div class="media-body">
+								<strong>{{ comment.author_name }}</strong>
+							</div>
+
+						</div>
+
 					</td>
-					<td><strong>{{ comment.author_name }}</strong></td>
-					<td>{{ comment.id }}</td>
-					<td>
+
+					<td class="results-table__id">{{ comment.id }}</td>
+					<td class="results-table__link-cell">
 						{% if comment.link %}
-							<a href="{{ comment.link }}">{{ comment.link }}</a>
+							<a class="results-table__link" href="{{ comment.link }}">{{ comment.link }}</a>
 						{% endif %}
 					</td>
-					<td>
+					<td class="results-table__content">
 						{{ comment.content|raw }}
 					</td>
-					<td>{{ comment.email|default(comment.email_hash) }}</td>
+					<td class="results-table__email-hash">
+						{% if comment.email %}
+							<strong>{{ comment.email }}</strong>
+						{% else %}
+							{{ comment.email_hash }}
+						{% endif %}
+					</td>
 				</tr>
 
 			{% endfor %}

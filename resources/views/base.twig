@@ -5,24 +5,62 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>{{ title_tag|default('WordPress Expose') }}</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/app.css">
 </head>
 
 <body>
 
-	<header>
-		<div class="container">
-			<h1><a href="/">WordPress Authors Tool</a></h1>
-			<hr>
-		</div>
-	</header>
+	{% block base_header %}
 
-	<div class="container">
+		<header class="main-header">
+
+			<div class="container-fluid">
+
+				<h2 class="main-header__logo">
+					<a href="/">
+						<span class="sr-only">WordPress Exposé</span>
+						<img src="/img/wordpress-expose-logo.png" alt="WordPress Exposé Logo">
+					</a>
+				</h2>
+
+			</div>
+
+		</header>
+
+	{% endblock %}
+
+	<div class="container-fluid">
 
 		{% block content %}{% endblock %}
 
 	</div>
 
+	{% block base_footer %}
+
+		<div class="main-footer">
+
+			<div class="container-fluid">
+
+				<div class="row">
+
+					<div class="col-md-8 col-md-offset-2">
+
+						<p>
+							WordPress Exposé was created by <a href="http://chrisgherbert.com">Chris Herbert</a>. The site's code is on <a href="https://github.com/chrisgherbert/wordpress-users-analysis">Github</a>.  I have a couple other little projects like <a href="http://www.trumponstern.com">Trump on Stern</a>, <a href="http://www.fakenewscodex.com">The Fake News Codex</a> and a <a href="http://iaintnoextra.tumblr.com">neglected blog</a>.
+						</p>
+
+					</div>
+
+				</div><!-- /.row -->
+
+			</div>
+
+		</div><!-- /.main-footer -->
+
+	{% endblock %}
+
 </body>
+
+<script src="/js/app.js"></script>
 
 </html>

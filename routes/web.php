@@ -15,15 +15,20 @@ Route::get('/', function () {
 	return view('home');
 });
 
-Route::get('/wordpress/users', function($url, $page = null){
+Route::get('/wordpress/users', function(){
 
-	$url = $_GET['url'];
+	$url = $_GET['url'] ?? '';
 	$page = $_GET['page'] ?? 1;
 
 	$data = [
 		'url' => $url,
 		'page' => $page,
+		'form' => 'users'
 	];
+
+	if (!$url){
+		return view('users', $data);
+	}
 
 	try {
 
@@ -45,15 +50,20 @@ Route::get('/wordpress/users', function($url, $page = null){
 
 });
 
-Route::get('/wordpress/comments', function($url, $page = null){
+Route::get('/wordpress/comments', function(){
 
-	$url = $_GET['url'];
+	$url = $_GET['url'] ?? '';
 	$page = $_GET['page'] ?? 1;
 
 	$data = [
 		'url' => $url,
 		'page' => $page,
+		'form' => 'comments'
 	];
+
+	if (!$url){
+		return view('comments', $data);
+	}
 
 	try {
 
@@ -75,10 +85,31 @@ Route::get('/wordpress/comments', function($url, $page = null){
 
 });
 
-Route::get('/wordpress/{url}/post-comments/{page?}', function($url, $page = null){
-	// to do
-});
 
-Route::get('/gravater/{$url}', function($url){
-	// to do
+Route::get('/gravatar', function(){
+
+	$url = $_GET['url'] ?? '';
+
+	$data = [
+		'url' => $url,
+		'form' => 'gravatar'
+	];
+
+	if (!$url){
+		return view('gravatar', $data);
+	}
+
+	try {
+
+		$gravatar = new App\Data\Gravatar($url);
+
+		$data['hash'] = $gravatar->get_hash();
+		$data['email'] = $gravatar->get_email();
+
+	} catch (Exception $e) {
+		$data['error'] = $e->getMessage();
+	}
+
+	return view('gravatar', $data);
+
 });

@@ -1,0 +1,61 @@
+<?php
+
+/** Configuration */
+
+$remote_directory = '';
+$ssh_user = '';
+$ssh_host = '';
+
+/** Stop editing */
+
+$local_site_directory = '.';
+
+$excluded_files = array(
+	'*.DS_Store',
+	'deploy-to-*.php',
+	'.env',
+	'.git',
+	'.gitignore',
+	'.travis.yml',
+	'composer.json',
+	'composer.lock',
+	'node_modules',
+	'/storage',
+	'keys',
+	'ruleset.xml',
+	'README.md',
+	'readme.md',
+	'.phpintel',
+	'phpunit.xml',
+	'package.json',
+);
+
+////////////////////////
+// Stop editing here! //
+////////////////////////
+
+function build_rysnc_exclusion(array $excluded_files){
+
+	$command_array = array();
+
+	foreach ($excluded_files as $file){
+		$command_array[] = "--exclude=$file";
+	}
+
+	return implode(' ', $command_array);
+
+}
+
+$excluded_files_string = build_rysnc_exclusion($excluded_files);
+
+$change_ownership_to_user = "sudo chown -R {$ssh_user}: $remote_directory";
+$change_ownership_to_apache = "sudo chown -R apache: $remote_directory";
+
+echo '** Starting deployment process **' . "\r\n";
+
+echo '** Syncing changes **' . "\r\n";
+echo shell_exec("ssh -t $ssh_user@$ssh_host '$change_ownership_to_user'");
+echo shell_exec("rsync -avz $excluded_files_string $local_site_directory $ssh_user@$ssh_host:'$remote_directory'");
+echo shell_exec("ssh -t $ssh_user@$ssh_host '$change_ownership_to_apache'");
+echo 'Complete';
+

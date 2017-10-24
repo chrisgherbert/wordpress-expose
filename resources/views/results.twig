@@ -2,82 +2,117 @@
 
 {% block content %}
 
-	{% block results_header %}
+	<div class="section">
 
-		<h4>
+		{% block results_tabs %}
 
-			Data for {{ site.name|default(site.url) }}
+			<div class="results-tabs tabs">
 
-			{% if items.current_page > 1 %} <small>(page {{ items.current_page }})</small> {% endif %}
+				<a href="/wordpress/users" class="tabs__link {% if form == 'users' %} active {% endif %}">
+					WordPress Users Search
+				</a>
 
-		</h4>
+				<a href="/wordpress/comments" class="tabs__link {% if form == 'comments' %} active {% endif %}">
+					WordPress Comments Search
+				</a>
 
-		{% if error %}
-			<div class="alert alert-danger">
-				{{ error }}
+				<a href="/gravatar" class="tabs__link {% if form == 'gravatar' %} active {% endif %}">
+					Gravatar Reverser
+				</a>
+
 			</div>
-		{% endif %}
-
-		<hr>
-
-	{% endblock %}
-
-	{% block results_main %}
-
-		{% block results_count %}
-
-			<h4>
-				Found {{ items.total_items|number_format }} Items
-			</h4>
 
 		{% endblock %}
 
-		{% block results_pagination_top %}
+		{% block results_form %}{% endblock %}
 
-			{% if items.total_pages > 1 %}
+		{% block results_header %}
 
-				<ul class="pagination">
+			<div class="results-header">
 
-					{% for page in items.pagination %}
+				{% if url %}
 
-						<li {% if page.current %}class="active"{% endif %}>
-							<a href="{{ page.url }}">
-								{{ page.num }}
-							</a>
-						</li>
+					<h1 class="results-header__title">
+						Data for <a target="_blank" href="{{ site.url }}">{{ site.name|default(site.url) }}</a>
+						{% if items.current_page > 1 %} (page {{ items.current_page }}) {% endif %}
+					</h1>
 
-					{% endfor %}
+					{% block results_count %}
 
-				</ul>
+						<div class="results-header__count">
+							Found {{ items.total_items|number_format }} Items
+						</div>
 
+					{% endblock %}
+
+				{% endif %}
+
+			</div>
+
+		{% endblock %}
+
+		{% block results_errors %}
+
+			{% if error %}
+				<div class="results-errors">
+					<div class="alert alert-danger">
+						{{ error }}
+					</div>
+				</div>
 			{% endif %}
 
 		{% endblock %}
 
-		{% block results_items %}{% endblock %}
+		{% block results_main %}
 
-		{% block results_pagination_bottom %}
+			{% block results_pagination_top %}
 
-			{% if items.total_pages > 1 %}
+				{% if items.total_pages > 1 %}
 
-				<ul class="pagination">
+					<ul class="pagination">
 
-					{% for page in items.pagination %}
+						{% for page in items.pagination %}
 
-						<li {% if page.current %}class="active"{% endif %}>
-							<a href="{{ page.url }}">
-								{{ page.num }}
-							</a>
-						</li>
+							<li {% if page.current %}class="active"{% endif %}>
+								<a href="{{ page.url }}">
+									{{ page.num }}
+								</a>
+							</li>
 
-					{% endfor %}
+						{% endfor %}
 
-				</ul>
+					</ul>
 
-			{% endif %}
+				{% endif %}
+
+			{% endblock %}
+
+			{% block results_items %}{% endblock %}
+
+			{% block results_pagination_bottom %}
+
+				{% if items.total_pages > 1 %}
+
+					<ul class="pagination">
+
+						{% for page in items.pagination %}
+
+							<li {% if page.current %}class="active"{% endif %}>
+								<a href="{{ page.url }}">
+									{{ page.num }}
+								</a>
+							</li>
+
+						{% endfor %}
+
+					</ul>
+
+				{% endif %}
+
+			{% endblock %}
 
 		{% endblock %}
 
-	{% endblock %}
+	</div>
 
 {% endblock %}

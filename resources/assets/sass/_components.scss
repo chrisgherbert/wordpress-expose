@@ -1,0 +1,286 @@
+
+/**
+ * Sections
+ */
+
+.section {
+	padding: $spacing 0;
+}
+
+/**
+ * Main Header
+ */
+
+.main-header {
+	background-image: linear-gradient(120deg, lighten($site-blue, 10%), $site-blue);
+	text-align: center;
+}
+
+.main-header__logo {
+	display: inline-block;
+	margin: 0;
+	font-size: 0;
+	transition: all 100ms ease;
+	&:hover {
+		opacity: 0.6;
+	}
+}
+
+/**
+ * Main Footer
+ */
+
+.main-footer {
+	text-align: center;
+	padding: $spacing 0;
+	background-color: $site-blue;
+	color: white;
+	font-size: $font-size-small;
+	a {
+		color: white;
+		font-weight: 800;
+	}
+}
+
+/**
+ * Tabs
+ */
+
+.tabs {
+	display: flex;
+	width: 100%;
+	margin-bottom: $spacing;
+}
+
+.tabs__link {
+	flex-grow: 1;
+	text-align: center;
+	font-weight: 800;
+	border-bottom: 3px solid rgba($site-gray, 0.4);
+	color: $site-gray;
+	padding-bottom: $spacing/4;
+	transition: all 150ms ease;
+	font-size: 16px;
+	&:hover, &:active, &:focus {
+		text-decoration: none;
+		color: $site-red;
+	}
+	&.active {
+		border-color: $site-red;
+		color: $site-red;
+	}
+}
+
+.tabs--top {
+	margin: $spacing/2 0 0 0;
+	.tabs__link {
+		border-top: 3px solid rgba($site-gray, 0.4);
+		border-bottom: none;
+		padding: $spacing/4 0 0 0;
+	}
+}
+
+.tabs--light {
+	.tabs__link {
+		color: rgba(white, 0.5);
+		&:hover, &:active, &:focus {
+			color: white;
+		}
+		&.active {
+			color: white;
+			border-color: white;
+		}
+	}
+}
+
+/**
+ * Results
+ */
+
+.results-header {
+	margin-bottom: $spacing/1.5;
+}
+
+.results-header__title {
+	font-weight: 300;
+	a {
+		font-weight: 800;
+	}
+}
+
+.results-header__count {
+	font-weight: 300;
+}
+
+/**
+ * Results Table
+ */
+
+.results-table {
+	font-size: $font-size-small*0.9;
+}
+
+.results-table__link {
+	text-overflow: ellipsis;
+}
+
+.results-table__avatar {
+	&:hover, &:active, &:focus {
+		transform: scale(1.1);
+	}
+}
+
+.results-table__name-inner {
+	max-width: 600px;
+}
+
+.results-table__description {
+
+}
+
+/**
+ * Search Form
+ */
+
+.search-form {
+	display: block;
+	border-radius: 5px;
+	background-color: white;
+	padding: 6px;
+	display: flex;
+	.media {
+		max-width: 20vw;
+	}
+}
+
+.search-form--outline {
+	border: 2px solid lighten($site-gray, 20%);
+}
+
+.search-form--results {
+	margin-bottom: $spacing;
+}
+
+.search-form__input {
+	flex-grow: 1;
+	border: none;
+	outline: none;
+	padding: 5px 10px;
+}
+
+.search-form__submit {
+	background-color: $site-red;
+	background-image: linear-gradient(to bottom, $site-red, darken($site-red, 8%));
+	font-weight: 800;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	font-size: $font-size-small;
+	padding: 5px 15px;
+	&:hover, &:focus {
+		background-color: darken($site-red, 15%);
+		background-image: none;
+	}
+	&:active {
+		background-color: darken($site-red, 25%);
+		background-image: none;
+	}
+}
+
+.search-form__submit--blue {
+	background-color: $brand-primary;
+	background-image: linear-gradient(to bottom, $brand-primary, darken($brand-primary, 8%));
+	&:hover, &:focus {
+		background-color: darken($brand-primary, 15%);
+		background-image: none;
+	}
+	&:active {
+		background-color: darken($brand-primary, 25%);
+		background-image: none;
+	}
+}
+
+.search-form__submit--green {
+	background-color: $brand-success;
+	background-image: linear-gradient(to bottom, $brand-success, darken($brand-success, 8%));
+	&:hover, &:focus {
+		background-color: darken($brand-success, 15%);
+		background-image: none;
+	}
+	&:active {
+		background-color: darken($brand-success, 25%);
+		background-image: none;
+	}
+}
+
+/**
+ * Home Hero
+ */
+
+.home-hero {
+	background-color: $site-blue;
+	background-image: url('/img/binoculars-bg.jpg');
+	background-size: cover;
+	background-position: center center;
+	padding: 0 0 $spacing*2.5 0;
+}
+
+.home-hero__logo {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	margin-bottom: $spacing/2;
+}
+
+.home-hero__heading {
+	text-align: center;
+	color: white;
+	margin-bottom: $spacing/2;
+}
+
+.home-content-section {
+	background-color: $site-beige;
+	color: darken($site-blue, 10%);
+	a {
+		text-decoration: underline;
+		font-weight: 800;
+	}
+}
+
+.home-content-section--dark {
+	background-color: darken($site-beige, 3%);
+}
+
+.home-content-section__heading {
+	text-align: center;
+	margin-bottom: $spacing/1.5;
+}
+
+/**
+ * Section Numbers
+ */
+
+.section-number {
+	display: inline-block;
+	font-weight: 800;
+	font-size: 26px;
+	line-height: 26px;
+	width: 50px;
+	height: 50px;
+	color: $site-red;
+	border: 5px solid $site-red;
+	border-radius: 50%;
+	position: relative;
+}
+
+.section-number__inner {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.section-number--light {
+	border: 5px solid rgba($site-beige, .25);
+	color: $site-beige;
+}

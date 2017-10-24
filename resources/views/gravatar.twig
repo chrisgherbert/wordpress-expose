@@ -1,0 +1,55 @@
+{% extends 'results.twig' %}
+
+{% block results_form %}
+
+	<form action="/gravatar" method="GET" class="search-form search-form--outline search-form--results search-form--gravatar">
+
+		<label for="url" class="sr-only">
+			Gravatar
+		</label>
+
+		<input type="text" name="url" class="search-form__input" value="{{ url }}" placeholder="Gravatar URL">
+
+		<button type="submit" class="search-form__submit search-form__submit--green">
+			Lookup Gravatar
+		</button>
+
+	</form>
+
+{% endblock %}
+
+{% block results_header %}
+
+	<div class="results-header">
+
+		{% if url %}
+
+			{% if email %}
+				<h1 class="results-header__title">
+					Gravatar email is <strong>{{ email }}</strong>
+				</h1>
+			{% else %}
+				<div class="results-errors">
+					<div class="alert alert-danger">
+						Could not identify email. Sorry :(
+					</div>
+				</div>
+			{% endif %}
+
+		{% endif %}
+
+		{% block results_count %}
+
+			{% if hash %}
+
+				<div class="results-header__count">
+					Email Hash: {{ hash }}
+				</div>
+
+			{% endif %}
+
+		{% endblock %}
+
+	</div>
+
+{% endblock %}
