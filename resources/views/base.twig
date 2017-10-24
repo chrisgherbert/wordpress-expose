@@ -4,8 +4,30 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>{{ title_tag|default('WordPress Expose') }}</title>
+
+	{# Meta Data #}
+	{% set default_title = 'WordPress Exposé' %}
+	{% set default_description = 'Find detailed information on WordPress sites - including authors and commenters - and convert Gravatars to real email addresses.' %}
+	<title>{{ page_title|default(default_title) }}</title>
+	<meta name="description" content=" {{ page_description|default(default_description) }}">
+	<meta property="og:title" content="{{ page_title|default(default_title) }}">
+	<meta property="og:description" content="{{ page_description|default(default_description) }}">
+	<meta property="og:type" content="website">
+	<meta property="og:image" content="/img/open-graph-default.png">
+
+	{# CSS #}
 	<link rel="stylesheet" href="/css/app.css">
+
+	{# Google Analytics #}
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-17236416-26"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-17236416-26');
+	</script>
+
 </head>
 
 <body>
