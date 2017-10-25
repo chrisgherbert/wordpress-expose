@@ -87,7 +87,9 @@
 						{% endif %}
 					</td>
 					<td class="results-table__content">
-						{{ comment.content|raw }}
+						<div class="results-table__content-inner">
+							{{ comment.content|raw }}
+						</div>
 					</td>
 					<td class="results-table__email-hash">
 						{% if comment.email %}

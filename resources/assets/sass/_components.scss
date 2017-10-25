@@ -284,3 +284,15 @@
 	border: 5px solid rgba($site-beige, .25);
 	color: $site-beige;
 }
+
+/**
+ * Comments Content
+ */
+
+.results-table__content-inner {
+	max-height: 5em;
+	overflow-y: auto;
+	blockquote, blockquote p {
+		font-size: $font-size-small*0.9;
+	}
+}
