@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Data\WordPress;
-use Curl\Curl;
+
+use Illuminate\Support\Facades\Cache;
 
 class Site {
 
@@ -93,15 +94,29 @@ class Site {
 	// Static //
 	////////////
 
-	protected static function get_curl(){
+	/**
+	 * Will use cached instance of object if available
+	 * @param  string $url Site URL
+	 * @return Site        Site object
+	 */
+	public static function get_cached($url){
 
-		$curl = new Curl;
-		$curl->setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Safari/604.1.38');
-		$curl->setOpt(CURLOPT_SSL_VERIFYHOST, 0);
-		$curl->setOpt(CURLOPT_SSL_VERIFYPEER, 0);
+		$cache_key = self::cache_key($url);
 
-		return $curl;
+		if (Cache::has($cache_key)){
+			return Cache::get($cache_key);
+		}
 
+		$obj = new self($url);
+
+		Cache::put($cache_key, $obj, (60 * 24));
+
+		return $obj;
+
+	}
+
+	public static function cache_key($url){
+		return 'site_obj_' . $url;
 	}
 
 }
