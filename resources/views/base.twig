@@ -9,11 +9,21 @@
 	{% set default_title = 'WordPress Exposé' %}
 	{% set default_description = 'Find detailed information on WordPress sites - including authors and commenters - and convert Gravatars to real email addresses.' %}
 	<title>{{ page_title|default(default_title) }}</title>
-	<meta name="description" content=" {{ page_description|default(default_description) }}">
+	<meta name="description" content="{{ page_description|default(default_description) }}">
+
+	{# Open Graph #}
 	<meta property="og:title" content="{{ page_title|default(default_title) }}">
 	<meta property="og:description" content="{{ page_description|default(default_description) }}">
 	<meta property="og:type" content="website">
 	<meta property="og:image" content="{{ url('/') }}/img/open-graph-default.png">
+
+	{# Twitter Cards #}
+	<meta property="title:title" content="{{ page_title|default(default_title) }}">
+	<meta property="twitter:card" content="summary">
+	<meta property="twitter:site" content="chrisgherbert">
+	<meta property="twitter:description" content="{{ page_description|default(default_description) }}">
+	<meta property="twitter:image" content="{{ url('/') }}/img/open-graph-default.png">
+
 
 	{% include 'components/site-icons.twig' only %}
 
