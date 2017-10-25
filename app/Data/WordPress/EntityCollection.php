@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Data\WordPress;
+
 use Curl\Curl;
+use Illuminate\Support\Facades\Cache;
 
 abstract class EntityCollection {
 
@@ -14,7 +16,7 @@ abstract class EntityCollection {
 	public $data;
 	public $headers;
 
-	public function __construct($site_url, $endpoint_url, $page = 1, $per_page = 50){
+	public function __construct($site_url, $endpoint_url, $page = 1, $per_page = 25){
 		$this->site_url = $site_url;
 		$this->endpoint_url = $endpoint_url;
 		$this->page = $page;
@@ -151,6 +153,35 @@ abstract class EntityCollection {
 		$curl->setOpt(CURLOPT_SSL_VERIFYPEER, 0);
 
 		return $curl;
+
+	}
+
+	/**
+	 * Will use cached instance of object if available
+	 * @param  string $url Site URL
+	 * @return Site        Site object
+	 */
+	public static function get_cached($site_url, $endpoint_url, $page = 1, $per_page = 25){
+
+		$cache_key = self::cache_key($site_url, $endpoint_url, $page, $per_page);
+
+		if (Cache::has($cache_key)){
+			return Cache::get($cache_key);
+		}
+
+		$obj = new static($site_url, $endpoint_url, $page, $per_page);
+
+		Cache::put($cache_key, $obj, (15));
+
+		return $obj;
+
+	}
+
+	public static function cache_key($site_url, $endpoint_url, $page, $per_page){
+
+		$string = implode('-', array($site_url, $endpoint_url, $page, $per_page));
+
+		return get_called_class() . '_obj_' . $string;
 
 	}
 
