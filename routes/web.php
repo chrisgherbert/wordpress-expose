@@ -33,10 +33,10 @@ Route::get('/wordpress/users', function(){
 	try {
 
 		// Set the site data (title, REST urls, etc)
-		$data['site']  = App\Data\WordPress\Site::get_cached($url);
+		$data['site']  = new App\Data\WordPress\Site($url);
 
 		// Set the site's users/authors data
-		$data['items'] = App\Data\WordPress\UsersCollection::get_cached(
+		$data['items'] = new App\Data\WordPress\UsersCollection(
 			$url,
 			$data['site']->get_users_endpoint_url(),
 			$page
@@ -68,10 +68,10 @@ Route::get('/wordpress/comments', function(){
 	try {
 
 		// Set the site data (title, REST urls, etc)
-		$data['site']  = App\Data\WordPress\Site::get_cached($url);
+		$data['site']  = new App\Data\WordPress\Site($url);
 
 		// Set the site's users/authors data
-		$data['items'] = App\Data\WordPress\CommentsCollection::get_cached(
+		$data['items'] = new App\Data\WordPress\CommentsCollection(
 			$url,
 			$data['site']->get_comments_endpoint_url(),
 			$page
