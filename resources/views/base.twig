@@ -13,7 +13,7 @@
 	<meta property="og:title" content="{{ page_title|default(default_title) }}">
 	<meta property="og:description" content="{{ page_description|default(default_description) }}">
 	<meta property="og:type" content="website">
-	<meta property="og:image" content="/img/open-graph-default.png">
+	<meta property="og:image" content="{{ url('/') }}/img/open-graph-default.png">
 
 	{% include 'components/site-icons.twig' only %}
 
