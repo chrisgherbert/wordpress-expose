@@ -151,6 +151,7 @@ abstract class EntityCollection {
 		$curl->setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Safari/604.1.38');
 		$curl->setOpt(CURLOPT_SSL_VERIFYHOST, 0);
 		$curl->setOpt(CURLOPT_SSL_VERIFYPEER, 0);
+		$curl->setOpt(CURLOPT_FOLLOWLOCATION, 1);
 
 		return $curl;
 
