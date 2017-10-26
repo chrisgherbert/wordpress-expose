@@ -51,6 +51,10 @@ $excluded_files_string = build_rysnc_exclusion($excluded_files);
 $change_ownership_to_user = "sudo chown -R {$ssh_user}: $remote_directory";
 $change_ownership_to_apache = "sudo chown -R apache: $remote_directory";
 
+echo '** Compiling assets **' . "\r\n";
+
+echo shell_exec("npm run production");
+
 echo '** Starting deployment process **' . "\r\n";
 
 echo '** Syncing changes **' . "\r\n";
