@@ -127,7 +127,7 @@
 						</h3>
 
 						<div class="home-content-section__text">
-							<p>The site relies on a series design decisions made by the developers of WordPress and Gravatar. In newer versions of WordPress, a list of all users who have posted content is publicly available.  The information about these users includes their display names, their usernames, and their “Gravatar.”</p>
+							<p>The site relies on a series of design decisions made by the developers of WordPress and Gravatar. In newer versions of WordPress, a list of all users who have posted content is publicly available.  The information about these users includes their display names, their usernames, and their “Gravatar.”</p>
 							<p><a href="https://en.wikipedia.org/wiki/Gravatar">Gravatar</a> is a service that can provide a unique avatar for each email address.  They’re used by sites like Stack Overflow, Discourse, and thousands of other forums and blogs that include commenting systems.</p>
 							<p>Unfortunately, the standard implementation exposes a “hash” of the user’s email address in the Gravatar URL.  In some cases, this makes it easy to reveal the actual email address of the user attached to a Gravatar.  These Gravatars are also automatically created for users, and the hashed email address is available even if they’ve never created an account with Gravatar.</p>
 						</div>
@@ -252,6 +252,7 @@
 
 							<p>If you maintain a WordPress-based website:</p>
 							<ol>
+								<li><strong>Disable Gravatars entirely.</strong> This is the simplest solution for most sites - simply turn off Gravatars by going to Settings / Discussion and uncheck the "Show Avatars" option.</li>
 								<li><strong>Block unauthenticated requests to the /users and /comments API endpoints.</strong>  There are many plugins that will do this. The <a href="https://wordpress.org/plugins/disable-json-api/">Disable REST API plugin</a> is a good one and allows you to selectively require auth for different endpoints.</li>
 								<li><strong>Use a third-party commenting system.</strong> <a href="https://disqus.com">Disqus</a> has its own issues, but their avatars do not expose the commenters' emails.</li>
 								<li><strong>Push WordPress to remove Gravatar integration.</strong> In my opinion, Gravatars simply shouldn't be publicly accessible for users and comments in a default WordPress installation. As a creator or contributor to a website, do you expect your email or photo to be exposed to everyone on the web, even if your theme doesn't include author photos? Of course not.</li>
