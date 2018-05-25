@@ -301,9 +301,16 @@
  * Comments Content
  */
 
+.results-table__link {
+	max-width: 200px;
+}
+
 .results-table__content-inner {
-	max-height: 5em;
+	max-height: 6em;
+	max-width: 600px;
 	overflow-y: auto;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
 	blockquote, blockquote p {
 		font-size: $font-size-small*0.9;
 	}
