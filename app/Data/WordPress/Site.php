@@ -11,7 +11,7 @@ class Site {
 	protected $users_collection;
 
 	public function __construct($url){
-		$this->url = $url;
+		$this->url = $this->fix_url(trim($url));
 		$this->site = $this->get_site_obj();
 	}
 
@@ -87,6 +87,20 @@ class Site {
 		$this->site = $site;
 
 		return $this->site;
+
+	}
+
+	///////////////
+	// Protected //
+	///////////////
+
+	protected function fix_url($url){
+
+		if (strpos($url, 'http://') === false && strpos($url, 'https://') === false){
+			$url = 'http://' . $url;
+		}
+
+		return $url;
 
 	}
 
